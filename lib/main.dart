@@ -11,6 +11,10 @@ import 'project/demomain.dart';
 import 'package:flutter_app/project/demo_bottom/bottom_navigation.dart';
 import 'package:flutter_app/project/demo_bottom/other_navigation.dart';
 import 'package:flutter_app/project/customrouter.dart';
+import 'package:flutter_app/project/searchdemo.dart';
+import 'package:flutter_app/project/warpdemo.dart';
+import 'package:flutter_app/project/splash.dart';
+import 'package:flutter_app/project/dragdemo.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -19,6 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -37,6 +42,10 @@ class MyApp extends StatelessWidget {
         'demoruter':(context)=>DemoRouter(),
         'bottom_nav':(context)=>BottomNavigationDemo(),
         'botton_other':(context)=>OtherBottom(),
+        'searchdemo':(context)=>SearchDemo(),
+        'warpdemo':(context)=>WarpDemo(),
+        'sp':(context)=>Splash(),
+        'drag':(context)=>DragDemo(),
       },
     );
   }

@@ -31,6 +31,54 @@ class DemoRouter extends StatelessWidget {
             onTap: (){
               Navigator.pushNamed(context, "botton_other");
             },
+          ),
+          new GestureDetector(
+            child: new Container(
+              child: Center(
+                child: Text("搜索",style: TextStyle(color: Colors.white,fontSize: 18),),
+              ),
+              color:Colors.red,
+              height:60,
+            ),
+            onTap: (){
+              Navigator.pushNamed(context, "searchdemo");
+            },
+          ),
+          new GestureDetector(
+            child: new Container(
+              child: Center(
+                child: Text("流失布局",style: TextStyle(color: Colors.white,fontSize: 18),),
+              ),
+              color:Colors.purple,
+              height:60,
+            ),
+            onTap: (){
+              Navigator.pushNamed(context, "warpdemo");
+            },
+          ),
+          new GestureDetector(
+            child: new Container(
+              child: Center(
+                child: Text("启动页",style: TextStyle(color: Colors.white,fontSize: 18),),
+              ),
+              color:Colors.blue,
+              height:60,
+            ),
+            onTap: (){
+              Navigator.pushNamed(context, "sp");
+            },
+          ),
+          new GestureDetector(
+            child: new Container(
+              child: Center(
+                child: Text("拖动",style: TextStyle(color: Colors.white,fontSize: 18),),
+              ),
+              color:Colors.red,
+              height:60,
+            ),
+            onTap: (){
+              Navigator.pushNamed(context, "drag");
+            },
           )
         ],
       )
