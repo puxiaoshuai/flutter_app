@@ -79,6 +79,18 @@ class DemoRouter extends StatelessWidget {
             onTap: (){
               Navigator.pushNamed(context, "drag");
             },
+          ),
+          new GestureDetector(
+            child: new Container(
+              child: Center(
+                child: Text("登录页面",style: TextStyle(color: Colors.white,fontSize: 18),),
+              ),
+              color:Colors.blue,
+              height:60,
+            ),
+            onTap: (){
+              Navigator.pushNamed(context, "login");
+            },
           )
         ],
       )

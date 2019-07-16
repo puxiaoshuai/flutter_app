@@ -15,6 +15,7 @@ import 'package:flutter_app/project/searchdemo.dart';
 import 'package:flutter_app/project/warpdemo.dart';
 import 'package:flutter_app/project/splash.dart';
 import 'package:flutter_app/project/dragdemo.dart';
+import 'package:flutter_app/project/loginpage.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
         'warpdemo':(context)=>WarpDemo(),
         'sp':(context)=>Splash(),
         'drag':(context)=>DragDemo(),
+        'login':(context)=>LoginPage(),
       },
     );
   }

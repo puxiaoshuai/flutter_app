@@ -20,8 +20,10 @@ class BujuDemo extends StatelessWidget {
                 child: new RaisedButton(
                     child:Text("点击我")
                     ,onPressed: (){}),
+
               ),
               new RaisedButton(
+                elevation: 2,
                   child:Text("点击我")
                   ,onPressed: (){})
             ],
