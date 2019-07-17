@@ -1,11 +1,27 @@
+class Student {
+
+  void test_method() {
+
+    print("This is a  test method");
+
+  }
+
+
+
+  void test_method1() {
+
+    print("This is a  test method1");
+
+  }
+
+}
+
 void main() {
-  Future.delayed(new Duration(seconds: 4), () {
-    return "4s返回";
-  }).then((onValue) {
-    print(onValue);
-  }).catchError((e) {
-    print("失败");
-  }).whenComplete(() {
-    print("结束");
-  });
+
+  new Student()
+
+    ..test_method()
+
+    ..test_method1();
+
 }

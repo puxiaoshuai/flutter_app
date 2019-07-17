@@ -16,6 +16,8 @@ import 'package:flutter_app/project/warpdemo.dart';
 import 'package:flutter_app/project/splash.dart';
 import 'package:flutter_app/project/dragdemo.dart';
 import 'package:flutter_app/project/loginpage.dart';
+import 'package:flutter_app/qq_page.dart';
+import 'package:flutter_app/donghua.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -48,6 +50,8 @@ class MyApp extends StatelessWidget {
         'sp':(context)=>Splash(),
         'drag':(context)=>DragDemo(),
         'login':(context)=>LoginPage(),
+        'qq':(context)=>QQ_page(),
+        'donghua':(context)=>DonghuaPage(),
       },
     );
   }
@@ -77,7 +81,16 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: Row(
+          children: <Widget>[
+            const  Icon(Icons.add),
+            const Icon(Icons.home)
+          ],
+
+        ),
+        centerTitle: true,
         title: Text(widget.title),
+
         elevation: 0.0,
       ),
       body: Center(
@@ -106,7 +119,8 @@ class _MyHomePageState extends State<MyHomePage> {
                // Navigator.pushNamed(context, "github");
                // Navigator.pushNamed(context, "listdemo2");
                 //Navigator.pushNamed(context, "griddemo");
-                Navigator.pushNamed(context, "bujudemo");
+//                Navigator.pushNamed(context, "bujudemo");
+                Navigator.pushNamed(context, "qq");
               },
 
             ),
