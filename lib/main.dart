@@ -1,120 +1,111 @@
 import 'package:flutter/material.dart';
-import 'newrouter.dart';
-import 'textdemo.dart';
-import 'buttondemo.dart';
-import 'imagedemo.dart';
-import 'listdemo.dart';
-import 'listdemo2.dart';
-import 'griddemo.dart';
-import 'bujuone.dart';
-import 'project/demomain.dart';
-import 'package:flutter_app/project/demo_bottom/bottom_navigation.dart';
-import 'package:flutter_app/project/demo_bottom/other_navigation.dart';
-import 'package:flutter_app/project/customrouter.dart';
+import 'package:flutter_app/jishupang/组件/container组件.dart';
+import 'package:flutter_app/jishupang/组件/text组件.dart';
+import 'package:flutter_app/jishupang/组件/image组件.dart';
+import 'package:flutter_app/jishupang/组件/list组件.dart';
+import 'package:flutter_app/jishupang/组件/list动态.dart';
+import 'package:flutter_app/jishupang/组件/网格组件.dart';
+import 'package:flutter_app/jishupang/布局/不灵水平row.dart';
+import 'package:flutter_app/jishupang/布局/灵活水平row.dart';
+import 'package:flutter_app/jishupang/布局/垂直布局.dart';
+import 'package:flutter_app/jishupang/布局/层叠布局.dart';
+import 'package:flutter_app/jishupang/布局/多组件层叠布局.dart';
+import 'package:flutter_app/jishupang/布局/卡片布局.dart';
+import 'package:flutter_app/jishupang/导航/界面A.dart';
+import 'package:flutter_app/界面结构/drawview.dart';
+import 'package:flutter_app/界面结构/bottom_nav.dart';
+import 'package:flutter_app/界面结构/pageview_demo.dart';
+//主函数入口
 void main() => runApp(MyApp());
 
+//无状态组件
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  //重写bulit方法
   @override
   Widget build(BuildContext context) {
+    // TODO: implement build
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: '第一个flutter应用'),
-      routes: {
-        "new_page":(context)=>NewRoute(),
-        "textdemo":(context)=>TextDemo(),
-        'buttondemo':(context)=>ButtonDemo(),
-        'imagedemo':(context)=>ImageDemo(),
-
-        'listdemo':(context)=>ListDemo(),
-        'listdemo2':(context)=>ListDemo2(),
-        'griddemo':(context)=>GridDemo(),
-        'bujudemo':(context)=>BujuDemo(),
-        //demo主要文件
-        'demoruter':(context)=>DemoRouter(),
-        'bottom_nav':(context)=>BottomNavigationDemo(),
-        'botton_other':(context)=>OtherBottom(),
-      },
-    );
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primaryColor: Colors.purple,
+          //点击高亮的颜色
+          highlightColor: Color.fromRGBO(255, 255, 255, 0.1),
+          //水波纹
+          splashColor: Color.fromRGBO(255, 255, 255, 0.5),
+        ),
+        title: "欢迎",
+        home: new Home());
   }
 }
 
-//创建一个有状态的组件
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class Home extends StatelessWidget {
 
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-    print("打印的值是$_counter");
-  }
-//对于StatefulWidget，将build方法放在State中，可以给开发带来很大的灵活性。
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        elevation: 0.0,
-      ),
-      body: Center(
-
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+    // TODO: implement build
+    return DefaultTabController(
+      length: 4,
+      child: Scaffold(
+        backgroundColor: Colors.grey[100],
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text("爱看看"),
+          elevation: 0,
+          actions: <Widget>[
+            IconButton(icon: Icon(Icons.search), tooltip: "搜索", onPressed: null)
+          ],
+          bottom: TabBar(
+              //图标的颜色
+              unselectedLabelColor: Colors.black26,
+              indicatorColor: Colors.black54,
+              indicatorSize: TabBarIndicatorSize.tab,
+              indicatorWeight: 2,
+              tabs: <Widget>[
+                Tab(
+                  icon: Icon(Icons.local_florist),
+                ),
+                Tab(
+                  icon: Icon(Icons.change_history),
+                ),
+                Tab(
+                  icon: Icon(Icons.directions_bike),
+                ),
+                Tab(
+                  icon: Icon(Icons.view_carousel),
+                )
+              ]),
+        ),
+        drawer: new DrawerView(),
+        body: TabBarView(
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+            FirstScreen(),
+            Icon(
+              Icons.change_history,
+              size: 129,
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
+            Icon(
+              Icons.directions_bike,
+              size: 128,
             ),
-            FlatButton(
-              child: Text("源代码更改不同路由进行跳转"),
-              textColor: Colors.blue,
-              onPressed: (){
-//                Navigator.push(context, new MaterialPageRoute(builder: (context){
-//                  return new NewRoute();
-//                }));
-             // Navigator.pushNamed(context, "new_page");
-               //Navigator.pushNamed(context, "textdemo");
-                //Navigator.pushNamed(context, "buttondemo");
-                //Navigator.pushNamed(context, "imagedemo");
-               // Navigator.pushNamed(context, "github");
-               // Navigator.pushNamed(context, "listdemo2");
-                //Navigator.pushNamed(context, "griddemo");
-                Navigator.pushNamed(context, "bujudemo");
-              },
-
-            ),
-            RaisedButton(
-              child: Text("点击我去进阶"),
-              onPressed: (){
-//                Navigator.pushNamed(context, "demoruter");
-              Navigator.of(context).push(CustomRoute(DemoRouter()));
-              },
-            )
+            PageViewDemo()
           ],
         ),
+        bottomNavigationBar:Bottom_Nav()
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
-
     );
   }
+
 }
+//Center(
+////container相当于div，铺满屏幕的
+//// child:new TextWidget()
+////child:new ImageWidget()
+//// child:new ListWeight()
+////child: new Listdong(),
+//// child: new Wangge(),
+//// child: new Linghuo(),
+//// child:  new Chuizhi(),
+//// child: new Cengdie2(),
+////child: new Kapian(),
+//child: new FirstScreen(),
+//),
