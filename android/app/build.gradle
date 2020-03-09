@@ -5,7 +5,9 @@ if (localPropertiesFile.exists()) {
         localProperties.load(reader)
     }
 }
-
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 def flutterRoot = localProperties.getProperty('flutter.sdk')
 if (flutterRoot == null) {
     throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
@@ -40,12 +42,31 @@ android {
         versionName flutterVersionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
 
+        release {
+            storeFile file('../test.jks')//签名文件路径
+            storePassword  keystoreProperties['storePassword']
+            keyAlias  keystoreProperties['keyAlias'] //别名
+            keyPassword  keystoreProperties['keyPasswoed'] //别名密码
+        }
+    }
     buildTypes {
+        debug{
+            signingConfig signingConfigs.release
+        }
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
+            /* 是否开启代码混淆，默认false */
+            minifyEnabled false
+            /* 是否应该生成可调试的apk */
+            debuggable false
+            /* 移除无用的resource文件 */
+            shrinkResources false
+            //混淆规则
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
 }
