@@ -38,7 +38,7 @@ class Home_State extends State<Home> {
     MinePage(),
   ];
   List<BottomNavigationBarItem> _barItem = [
-    BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('首页')),
+    BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('首页1')),
     BottomNavigationBarItem(icon: Icon(Icons.list), title: Text('发现')),
     BottomNavigationBarItem(icon: Icon(Icons.people), title: Text('我的')),
   ];
