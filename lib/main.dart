@@ -1,20 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/jishupang/组件/container组件.dart';
-import 'package:flutter_app/jishupang/组件/text组件.dart';
-import 'package:flutter_app/jishupang/组件/image组件.dart';
-import 'package:flutter_app/jishupang/组件/list组件.dart';
-import 'package:flutter_app/jishupang/组件/list动态.dart';
-import 'package:flutter_app/jishupang/组件/网格组件.dart';
-import 'package:flutter_app/jishupang/布局/不灵水平row.dart';
-import 'package:flutter_app/jishupang/布局/灵活水平row.dart';
-import 'package:flutter_app/jishupang/布局/垂直布局.dart';
-import 'package:flutter_app/jishupang/布局/层叠布局.dart';
-import 'package:flutter_app/jishupang/布局/多组件层叠布局.dart';
-import 'package:flutter_app/jishupang/布局/卡片布局.dart';
-import 'package:flutter_app/jishupang/导航/界面A.dart';
-import 'package:flutter_app/界面结构/drawview.dart';
-import 'package:flutter_app/界面结构/bottom_nav.dart';
-import 'package:flutter_app/界面结构/pageview_demo.dart';
+import '掘金实战1/pages/HomePage.dart';
+import '掘金实战1/pages/FindPage.dart';
+import '掘金实战1/pages/MinePage.dart';
 //主函数入口
 void main() => runApp(MyApp());
 
@@ -38,74 +25,73 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Home extends StatelessWidget {
-
+class Home extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return DefaultTabController(
-      length: 4,
-      child: Scaffold(
-        backgroundColor: Colors.grey[100],
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text("爱看看"),
-          elevation: 0,
-          actions: <Widget>[
-            IconButton(icon: Icon(Icons.search), tooltip: "搜索", onPressed: null)
-          ],
-          bottom: TabBar(
-              //图标的颜色
-              unselectedLabelColor: Colors.black26,
-              indicatorColor: Colors.black54,
-              indicatorSize: TabBarIndicatorSize.tab,
-              indicatorWeight: 2,
-              tabs: <Widget>[
-                Tab(
-                  icon: Icon(Icons.local_florist),
-                ),
-                Tab(
-                  icon: Icon(Icons.change_history),
-                ),
-                Tab(
-                  icon: Icon(Icons.directions_bike),
-                ),
-                Tab(
-                  icon: Icon(Icons.view_carousel),
-                )
-              ]),
-        ),
-        drawer: new DrawerView(),
-        body: TabBarView(
-          children: <Widget>[
-            FirstScreen(),
-            Icon(
-              Icons.change_history,
-              size: 129,
-            ),
-            Icon(
-              Icons.directions_bike,
-              size: 128,
-            ),
-            PageViewDemo()
-          ],
-        ),
-        bottomNavigationBar:Bottom_Nav()
-      ),
-    );
+  Home_State createState() => Home_State();
+}
+
+class Home_State extends State<Home> {
+  int _currentIndex =0;
+  List<Widget> _pageList = [
+    MainPage(),
+    FindPage(),
+    MinePage(),
+  ];
+  List<BottomNavigationBarItem> _barItem = [
+    BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('首页')),
+    BottomNavigationBarItem(icon: Icon(Icons.list), title: Text('发现')),
+    BottomNavigationBarItem(icon: Icon(Icons.people), title: Text('我的')),
+  ];
+  //创建pageview控制器
+  PageController _pageController;
+  void _onPageChanged(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
   }
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _pageController = PageController(initialPage: _currentIndex);
+
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        centerTitle: true,
+        title: Text("爱看看"),
+      ),
+      body:PageView.builder(
+        itemBuilder: (context, index) => _pageList[index],
+        itemCount: _pageList.length,
+        controller: _pageController,
+        onPageChanged: _onPageChanged,
+
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+
+        elevation: 1,
+        backgroundColor: Colors.white,
+        onTap: (int index){
+          setState(() {
+            this._currentIndex =index;
+          });
+          _pageController.jumpToPage(index);
+
+        },
+        currentIndex:this._currentIndex,
+        items: _barItem,
+        fixedColor: Colors.purple,
+        selectedFontSize: 12,
+        type: BottomNavigationBarType.fixed,
+
+      ),
+    );
+
+  }
 }
-//Center(
-////container相当于div，铺满屏幕的
-//// child:new TextWidget()
-////child:new ImageWidget()
-//// child:new ListWeight()
-////child: new Listdong(),
-//// child: new Wangge(),
-//// child: new Linghuo(),
-//// child:  new Chuizhi(),
-//// child: new Cengdie2(),
-////child: new Kapian(),
-//child: new FirstScreen(),
-//),
+
