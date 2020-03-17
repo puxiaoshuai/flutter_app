@@ -1,10 +1,13 @@
-import 'package:flutter/material.dart';
+
+import 'package:flutter/cupertino.dart';
 class TestPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Center(
-        child: Text("测试"),
+        child: CupertinoButton(
+          child: Text("点击"),
+        ),
       ),
     );
   }

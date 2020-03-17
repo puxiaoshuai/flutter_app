@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/%E6%8E%98%E9%87%91%E5%AE%9E%E6%88%981/pages/GankPage.dart';
 import 'package:flutter_app/%E6%8E%98%E9%87%91%E5%AE%9E%E6%88%981/pages/TestPage.dart';
 
 class MainPage extends StatefulWidget {
@@ -6,7 +7,7 @@ class MainPage extends StatefulWidget {
   _MainPageState createState() => _MainPageState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _MainPageState extends State<MainPage>  with AutomaticKeepAliveClientMixin{
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -39,7 +40,7 @@ class _MainPageState extends State<MainPage> {
           Expanded(
             child: TabBarView(
               children: <Widget>[
-                TestPage(),
+                GankPage(),
                 TestPage(),
                 TestPage(),
                 TestPage(),
@@ -49,4 +50,8 @@ class _MainPageState extends State<MainPage> {
         ],
       ));
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }
